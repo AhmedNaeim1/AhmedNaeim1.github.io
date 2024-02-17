@@ -1,6 +1,12 @@
 // Formspree code
 const form = document.getElementById("contact-form");
 
+let intro = document.querySelector(".intro");
+let logo = document.querySelector(".logo-header");
+let logoSpan = document.querySelectorAll(".logo");
+const nav = document.querySelector(".nav");
+const head = document.querySelector(".header");
+
 async function handleSubmit(event) {
   event.preventDefault();
   var status = document.getElementById("alert");
@@ -35,8 +41,8 @@ async function handleSubmit(event) {
 }
 form.addEventListener("submit", handleSubmit);
 
-// FORM BORDERS 
-$("#contact-form input,#contact-form textarea").on("input focusin",(e)=>{
+// FORM BORDERS
+$("#contact-form input,#contact-form textarea").on("input focusin", (e) => {
   $(e.target).parent().addClass("focusIn");
   if ($(e.target).val().trim().length > 0) {
     $(e.target).parent().addClass("valid");
@@ -47,8 +53,8 @@ $("#contact-form input,#contact-form textarea").on("input focusin",(e)=>{
   }
 });
 
-$("#contact-form input,#contact-form textarea").on("focusout",(e)=>{
-    $(e.target).parent().removeClass("focusIn");
+$("#contact-form input,#contact-form textarea").on("focusout", (e) => {
+  $(e.target).parent().removeClass("focusIn");
 });
 
 // NAVIGATION PANEL
@@ -218,4 +224,27 @@ var typed = new Typed(".type", {
   backDelay: 1000,
   backSpeed: 60,
   loop: true,
+});
+
+window.addEventListener("DOMContentLoaded", () => {
+  setTimeout(() => {
+    logoSpan.forEach((span, idx) => {
+      setTimeout(() => {
+        span.classList.add("active");
+      }, (idx + 1) * 400);
+    });
+    setTimeout(() => {
+      logoSpan.forEach((span, idx) => {
+        setTimeout(() => {
+          span.classList.remove("active");
+          span.classList.add("fade");
+        }, (idx + 1) * 50);
+      });
+    }, 2000);
+    setTimeout(() => {
+      intro.style.top = "-100vh";
+      nav.style.display = "flex";
+      head.style.position = "fixed";
+    }, 2300);
+  });
 });
